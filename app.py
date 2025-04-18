@@ -164,6 +164,9 @@ except Exception as e:
 
 import os
 
+logging.debug(f"Current directory contents: {os.listdir()}")
+
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # Default to 5000 if PORT isn't set
     app.run(host='0.0.0.0', port=port)
