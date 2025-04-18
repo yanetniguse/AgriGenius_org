@@ -143,45 +143,24 @@ def get_irrigation_recommendation():
 
     return jsonify({"recommendation": recommendation})
 
+# Set up logging
+logging.basicConfig(level=logging.DEBUG)
+
 # ✅ Load the trained XGBoost model and LabelEncoder
-with open("xgb_crop_model.pkl", "rb") as model_file:
-    model = pickle.load(model_file)
+try:
+    with open("xgb_crop_model.pkl", "rb") as model_file:
+        model = pickle.load(model_file)
+    logging.debug("Model loaded successfully.")
+except Exception as e:
+    logging.error(f"Error loading model: {e}")
 
-with open("label_encoder.pkl", "rb") as le_file:
-    le = pickle.load(le_file)  # Load LabelEncoder
+try:
+    with open("label_encoder.pkl", "rb") as le_file:
+        le = pickle.load(le_file)
+    logging.debug("LabelEncoder loaded successfully.")
+except Exception as e:
+    logging.error(f"Error loading label encoder: {e}")
 
-# ✅ Prediction Function
-def predict_crop(input_features):
-    """
-    Predict the recommended crop based on soil and climate conditions.
-    :param input_features: List of feature values (N, P, K, Temperature, Humidity, pH, Rainfall)
-    :return: Predicted crop label
-    """
-    input_array = np.array([input_features]).reshape(1, -1)  # Convert input to array
-    predicted_label = model.predict(input_array)[0]  # Predict crop
-    predicted_crop = le.inverse_transform([predicted_label])[0]  # Convert label back to crop name
-    return predicted_crop
-
-# ✅ API Route for Prediction
-@app.route("/predict", methods=["POST"])
-def predict():
-    try:
-        data = request.json  # Get JSON data from request
-        features = [
-            data["Nitrogen"], 
-            data["Phosphorus"], 
-            data["Potassium"], 
-            data["Temperature"], 
-            data["Humidity"], 
-            data["pH"], 
-            data["Rainfall"]
-        ]
-        
-        predicted_crop = predict_crop(features)  # Get prediction from model
-        return jsonify({"Recommended Crop": predicted_crop})  # Return JSON response
-
-    except Exception as e:
-        return jsonify({"error": str(e)})
 
 import os
 
