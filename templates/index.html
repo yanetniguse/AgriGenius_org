@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriChat - Smart Agriculture Chatbots</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    
+    <h1>🌾 AgriChat - Smart Agriculture Chatbots 🌱</h1>
+
+    <!-- FAQ Chatbot Section -->
+    <div id="faq-chatbot">
+        <h2>📌 Quick Farming Answers</h2>
+        <div id="faq">
+            <button onclick="setQuestion('How to grow maize?')">How to grow maize?</button>
+            <button onclick="setQuestion('Best time to plant potatoes?')">Best time to plant potatoes?</button>
+            <button onclick="setQuestion('How to identify wilt?')">How to identify wilt?</button>
+            <button onclick="setQuestion('What soil is best for carrots?')">What soil is best for carrots?</button>
+        </div>
+        <input type="text" id="faq-question" placeholder="Ask about farming...">
+        <button onclick="askFAQ()">Ask</button>
+        <p id="faq-response"></p>
+    </div>
+
+<!--
+    <h2>Crop Recommendation System</h2>
+    <label>Nitrogen (N): <input type="number" id="N"></label><br>
+    <label>Phosphorus (P): <input type="number" id="P"></label><br>
+    <label>Potassium (K): <input type="number" id="K"></label><br>
+    <label>Temperature (°C): <input type="number" id="temperature"></label><br>
+    <label>Humidity (%): <input type="number" id="humidity"></label><br>
+    <label>pH Level: <input type="number" step="0.1" id="ph"></label><br>
+    <label>Rainfall (mm): <input type="number" id="rainfall"></label><br>
+    
+    <button onclick="getRecommendation()">Get Recommendation</button>
+    <p id="result"></p>
+
+    <script>
+        async function getRecommendation() {
+            const inputData = {
+                N: parseFloat(document.getElementById("N").value),
+                P: parseFloat(document.getElementById("P").value),
+                K: parseFloat(document.getElementById("K").value),
+                temperature: parseFloat(document.getElementById("temperature").value),
+                humidity: parseFloat(document.getElementById("humidity").value),
+                ph: parseFloat(document.getElementById("ph").value),
+                rainfall: parseFloat(document.getElementById("rainfall").value)
+            };
+
+            const response = await fetch("http://127.0.0.1:5000/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(inputData)
+            });
+
+            const result = await response.json();
+            document.getElementById("result").innerText = 
+                result.recommended_crop ? `Recommended Crop: ${result.recommended_crop}` : `Error: ${result.error}`;
+        }
+    </script>
+
+
+in app.py":
+# Load the trained model
+model = joblib.load("crop_prediction_model.pkl")
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    try:
+        data = request.get_json()
+        features = np.array(data["features"]).reshape(1, -1)
+        prediction = model.predict(features)
+        return jsonify({"prediction": prediction[0]})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+        
+    <hr>
+
+
+     AgriChat AI Section 
+    <div id="agri-chat">
+        <h2>🤖 AgriChat AI - Chat with an Expert</h2>
+        <div id="chatbox">
+            <div id="chat-history"></div>
+            <input type="text" id="chat-input" placeholder="Ask anything about farming...">
+            <button onclick="askAgriChat()">Send</button>
+        </div>
+    </div>
+-->
+
+<!-- Prediction Form -->
+<h1 id="crop">Crop Recommendation System</h1>
+<form id="predictForm">
+    <label>Nitrogen: <input type="number" id="nitrogen"placeholder="Nitrogen" required></label><br>
+    <label>Phosphorus: <input type="number" id="phosphorus"placeholder="Phosphorus" required></label><br>
+    <label>Potassium: <input type="number" id="potassium"placeholder="Potassium" required></label><br>
+    <label>Temperature (°C): <input type="number" id="temperature" step="0.1"placeholder="Temperature (°C)" required></label><br>
+    <label>Humidity (%): <input type="number" id="humidity" step="0.1" placeholder="Humidity (%)"required></label><br>
+    <label>pH Level: <input type="number" id="ph" step="0.1"placeholder="pH Level" required></label><br>
+    <label>Rainfall (mm): <input type="number" id="rainfall"placeholder="Rainfall (mm)" step="0.1" required></label><br><br>
+    
+    <button type="submit">Predict Crop</button>
+</form>
+
+<!-- Display the prediction result -->
+<div id="result"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("predictForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            // Collect the form data
+            let formData = {
+                "Nitrogen": parseFloat(document.getElementById("nitrogen").value),
+                "Phosphorus": parseFloat(document.getElementById("phosphorus").value),
+                "Potassium": parseFloat(document.getElementById("potassium").value),
+                "Temperature": parseFloat(document.getElementById("temperature").value),
+                "Humidity": parseFloat(document.getElementById("humidity").value),
+                "pH": parseFloat(document.getElementById("ph").value),
+                "Rainfall": parseFloat(document.getElementById("rainfall").value)
+            };
+
+            // Send data to Flask API
+            fetch("http://127.0.0.1:5000/predict", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the recommended crop in the result div
+                document.getElementById("result").innerHTML = `
+                    <h3>Recommended Crop: ${data["Recommended Crop"]}</h3>
+                `;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                document.getElementById("result").innerHTML = `
+                    <h3>Failed to get prediction. Please try again.</h3>
+                `;
+            });
+        });
+    });
+</script>
+
+<div class="container">
+    <h2>🌱 Smart Irrigation System</h2>
+    <p>Get AI-powered recommendations for efficient water use.</p>
+
+    <form id="irrigationForm">
+        <label for="soil">🌿 Soil Moisture:</label>
+        <select id="soil">
+            <option value="">-- Select Level --</option>
+            <option value="Very Dry">Very Dry</option>
+            <option value="Dry">Dry</option>
+            <option value="Moist">Moist</option>
+            <option value="Wet">Wet</option>
+        </select>
+        <input type="number" id="soil_numeric" placeholder="or Enter % (0-100)">
+
+        <label for="temperature">🌡 Temperature (°C):</label>
+        <select id="temperature">
+            <option value="">-- Select Level --</option>
+            <option value="Cold">Cold</option>
+            <option value="Warm">Warm</option>
+            <option value="Hot">Hot</option>
+        </select>
+        <input type="number" id="temperature_numeric" placeholder="or Enter °C (0-50)">
+
+        <label for="humidity">💧 Humidity (%):</label>
+        <select id="humidity">
+            <option value="">-- Select Level --</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+        <input type="number" id="humidity_numeric" placeholder="or Enter % (0-100)">
+
+        <button type="submit">Get Recommendation</button>
+    </form>
+
+    <p id="output"></p>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("irrigationForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+    
+            let soil = document.getElementById("soil").value;
+            let soil_numeric = document.getElementById("soil_numeric").value;
+            let temp = document.getElementById("temperature").value;
+            let temp_numeric = document.getElementById("temperature_numeric").value;
+            let hum = document.getElementById("humidity").value;
+            let hum_numeric = document.getElementById("humidity_numeric").value;
+    
+            // Use number if available, otherwise use dropdown value
+            soil = soil_numeric ? parseInt(soil_numeric) : soil;
+            temp = temp_numeric ? parseInt(temp_numeric) : temp;
+            hum = hum_numeric ? parseInt(hum_numeric) : hum;
+    
+            // Debugging: Print to console
+            console.log("Sending data:", { soil, temp, hum });
+    
+            if (!soil || !temp || !hum) {
+                document.getElementById("output").innerHTML = "⚠️ Please enter at least one value for each field.";
+                return;
+            }
+    
+            fetch("/get_irrigation_recommendation", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ soil, temp, hum }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Response from server:", data);
+                document.getElementById("output").innerHTML = `<p>🌱 Recommendation: <strong>${data.recommendation}</strong></p>`;
+            })
+            .catch(error => {
+                document.getElementById("output").innerHTML = "❌ Error processing request.";
+                console.error("Error:", error);
+            });
+        });
+    });
+    
+
+
+
+    
+  
+        // FAQ Chatbot Functionality
+        function setQuestion(question) {
+            document.getElementById("faq-question").value = question;
+            askFAQ();
+        }
+
+        function askFAQ() {
+            let question = document.getElementById("faq-question").value;
+            fetch("/faq", {
+                method: "POST",
+                body: new URLSearchParams({ "question": question }),
+                headers: { "Content-Type": "application/x-www-form-urlencoded" }
+            })
+            .then(response => response.json())
+            .then(data => document.getElementById("faq-response").innerText = "✅ " + data.response)
+            .catch(error => console.error("Error:", error));
+        }
+
+        // AgriChat AI Chatbot Functionality
+        function askAgriChat() {
+            let userMessage = document.getElementById("chat-input").value;
+            if (userMessage.trim() === "") return;
+
+            let chatHistory = document.getElementById("chat-history");
+            chatHistory.innerHTML += `<p><b>You:</b> ${userMessage}</p>`;
+
+            fetch("/agri-chat", {
+                method: "POST",
+                body: new URLSearchParams({ "message": userMessage }),
+                headers: { "Content-Type": "application/x-www-form-urlencoded" }
+            })
+            .then(response => response.json())
+            .then(data => {
+                chatHistory.innerHTML += `<p><b>AgriChat:</b> ${data.response}</p>`;
+                document.getElementById("chat-input").value = "";
+            })
+            .catch(error => console.error("Error:", error));
+        }
+        
+    
+
+        // Chatbase Integration
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="DOD8oYHsTQh1lEvpqMZdd";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+        </script>
+    
+
+
+        <!--prediction ML crop_prediction_model.pkl-->
+        
+</sc>        
+</body>
+<footer>
+    <p>Developed by Yanet Niguse Tesfay | © 2024 USIU-Africa</p>
+</footer>
+
+</html>

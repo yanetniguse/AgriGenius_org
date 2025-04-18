@@ -1,0 +1,116 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f5fff5;
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #2d7b2d;
+}
+
+#faq-question, button {
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+
+/* FAQ Chatbot */
+#faq-chatbot {
+    background: #e0f2e0;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* AgriChat AI 
+#agri-chat {
+    background: #f0f8ff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#chatbox {
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#chat-history {
+    background: white;
+    padding: 10px;
+    min-height: 200px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+/* Form Styles */
+#predictForm {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #e8f5e9; /* Light green background for the form */
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    margin: 10px 0 5px;
+    color: #4CAF50;
+    font-weight: 700;
+}
+
+input[type="number"] {
+    width: 70%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Crop Prediction Section */
+#predictForm{
+    background-image: url('https://i.pinimg.com/474x/67/0f/0f/670f0fc7730d9a2b53408ec1470f683e.jpg');
+    background-size: cover; /* Ensure the image covers the entire section */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent repeating the image */
+    padding: 20px;
+    border-radius: 10px;
+    color: white; /* Adjust text color to ensure it’s readable on the background */
+}
+
+/* Other general styles can stay the same */
+
+.container {
+    flex: 1; /* Pushes the footer down */
+}
+
+
+footer {
+    text-align: center;
+    background: #333;
+    color: white;
+    padding: 10px;
+}
+
+
