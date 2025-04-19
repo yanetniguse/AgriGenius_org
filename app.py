@@ -128,7 +128,7 @@ try:
         model = pickle.load(f)
     logging.debug("✅ XGBoost model loaded successfully.")
 except Exception as e:
-    logging.error(f"❌ Failed to load model: {e}")
+    print(f"❌ Failed to load model: {e}")
 
 try:
     with open("label_encoder.pkl", "rb") as f:
@@ -154,6 +154,7 @@ def predict_crop(input_features):
 def predict():
     try:
         data = request.json  # Get JSON data from request
+        print("🚀 Received prediction request:", data)
         features = [
             data["Nitrogen"], 
             data["Phosphorus"], 
