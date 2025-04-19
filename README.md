@@ -2,7 +2,7 @@
 **AI-Powered Agriculture Assistant for Smarter Farming** 🚀  
 
 ![image](https://github.com/user-attachments/assets/958d0685-9f9b-4016-925d-1701f1c4d5ea)
-
+![image](https://github.com/user-attachments/assets/91420af7-2976-43b3-b746-12aa3043aaa8)
 ---
 
 ## 📌 **About AgriGenius**  
