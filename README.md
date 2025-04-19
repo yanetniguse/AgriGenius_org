@@ -70,7 +70,7 @@ Now, visit `http://127.0.0.1:5000` in your browser.
 ---
 
 ## 🌍 **Live Demo**  
-[🔗 Click Here to View the Live Version](https://your-live-link.com) _(Add hosting link when deployed)_
+[🔗 https://agrigenius-org-1.onrender.com) _(Add hosting link when deployed)_
 
 ---
 
