@@ -167,9 +167,11 @@ def predict():
         
         predicted_crop = predict_crop(features)  # Get prediction from model
         return jsonify({"Recommended Crop": predicted_crop})  # Return JSON response
+        
 
     except Exception as e:
-        return jsonify({"error": str(e)})
+        print(f"[PREDICTION ERROR] {e}")
+        return jsonify({'error': 'Failed to get prediction. Please try again.'}), 500
 
 logging.debug(f"📂 Current directory contents: {os.listdir()}")
 
